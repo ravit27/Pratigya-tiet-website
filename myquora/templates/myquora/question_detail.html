@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Pratigya Abhiyan</title>
+ {% extends "base_generic.html" %}
+
+{% block content %}
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="#" />
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../static/css/pogo-slider.min.css" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+    <link rel="stylesheet" href="../../static/css/responsive.css" />
+    <link rel="stylesheet" href="../../static/css/custom.css" />
+
+
+</head>
+
+<body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
+
+    <div id="preloader">
+        <div class="loader">
+            <img src="../../static/loader.gif" alt="#" />
+        </div>
+    </div>
+
+    <header class="top-header">
+        <div class="header_top">
+            
+            <div class="container">
+                <div class="row">
+                    <div class="logo_section">
+                        <a class="navbar-brand" ><img src="../../static/logo.png" alt="image" height="123" width="350"></a>
+                    </div>
+                    <div class="site_information">
+                        <ul>
+                            <li><a href="mailto:exchang@gmail.com"><img src="../../static/mail_icon.png" alt="#" />mail@gmail.com</a></li>
+                            <li><a href="tel:exchang@gmail.com"><img src="../../static/phone_icon.png" alt="#" />+01234578</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="header_bottom">
+          <div class="container">
+            <div class="col-sm-12">
+                <div class="menu_orange_section" style="background: #ff880e;">
+                   <nav class="navbar header-nav navbar-expand-lg"> 
+                     <div class="menu_section">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
+                    <ul class="navbar-nav">
+                        <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                        <li><a class="nav-link" href="{% url 'events' %}">Events</a></li>
+                        <li><a class="nav-link" href="{% url 'index' %}">Discussion</a></li>
+                        <li><a class="nav-link" href="{% url 'team' %}">Our Team</a></li>
+                        <li><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                     </div>
+                 </nav>
+                 
+                </div>
+            </div>
+          </div>
+        </div>
+        
+    </header>
+   
+<div style="margin-left: 5px;" class="row text-info">
+    <h3><br><br><br><br>  Ques: {{ question.question_text }} </h3>
+</div>
+  
+  <div class="text-success">
+    <div class="row">
+        <div class="col">
+          <form action = "{{answer_url}}" method = "GET" >
+            <input type = "hidden" name = "q_id" value = {{q_id}} /> 
+            <input type ="submit"  class="btn btn-success" role="button" value="Answer this question">
+          </form> 
+        </div>
+        <div class="col-5"></div>
+        <div class="col">
+          <strong>Author:</strong> <a href="{{ question.author.get_absolute_url }}">{{ question.author }}</a>
+          <br>
+          <strong>Created On:</strong> {{ question.date_created }}
+        </div>
+    </div>
+
+  <div style="margin-left:20px;margin-top:10px; margin-right: 10px;">
+    
+    {% if answer_list %}
+    <ul>
+        <h4>All Answers</h4>
+      {% for answer in answer_list %}
+          <br>
+          <div class="card">
+            <div class="card-body">
+              {% comment %} <h5 class="card-title">Special title treatment</h5> {% endcomment %}
+              <p class="card-text">
+                <div class="row text-dark">
+            {{ answer.answer_text }} 
+          </div>
+          <br>
+          <br>
+          <div class="row text-success">
+
+            <!-- upvote form -->
+              <div class="col">
+                <form action="{{upvote_url}}{{answer.id}}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" value="Upvote" class="btn btn-primary">
+                  <span class="text-dark">{{ answer.upvote }}</span>
+                </form>
+              </div>
+
+            <!-- downvote form -->
+            <div class="col">
+                <form action="{{downvote_url}}{{answer.id}}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" value="Downvote" class="btn btn-primary">
+                  <span class="text-dark">{{ answer.downvote }}</span>
+                </form>
+              </div>
+
+
+            <!-- comment form -->
+            <div class="col">
+                <form action="/myquora/answer/{{answer.id}}/comment/" method="GET">
+                  {% csrf_token %}
+                  <input type="submit" value="Comment" class="btn btn-primary">
+                </form>
+            </div>
+
+            {% comment %} update answer {% endcomment %}
+            <div class="col-4">
+            {% if user.is_authenticated %}
+              {% if  user.get_username  ==  answer.author.user.username  %}
+                  <a href="/myquora/answer/{{answer.id}}/update/" class="btn btn-primary">Update Answer</a>
+              {% endif %}
+            {% endif %} 
+            </div>
+            <div class="col-3">
+                  by <a href="{{ answer.author.get_absolute_url }}">{{answer.author}} </a> 
+                  (on {{answer.date_updated}}) 
+            </div>
+
+              </p>
+              {% comment %} <a style="padding: 3px;" class="btn-success" href="/myquora/question/{{question.id}}/update/">Update Question</a> {% endcomment %}
+
+            </div>
+          </div>
+ </div>
+ 
+ <div style="margin-left: 20px;">
+        <br>
+        <ul class="list-group">
+          {% for key, comment in comment_dictionary.items %}
+            {% if key == answer.id %}
+              {% if comment %}
+                {% for comm in comment %}
+            
+                    <li class="list-group-item disabled">{{ comm }}</li>
+
+                {% endfor %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        <ul>
+        </div>
+      {% endfor %}
+    </ul>
+    {% else %}
+
+    <div class="text-danger">
+        There are no answers for this question.
+    </div>
+
+    {% endif %}  
+
+  </div>
+
+    <div class="footer_bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="crp">© Copyrights 2020 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+
+    <!-- ALL JS FILES -->
+    <script src="../../static/js/jquery.min.js"></script>
+  <script src="../../static/js/popper.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="../../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../../static/js/jquery.pogo-slider.min.js"></script>
+    <script src="../../static/js/slider-index.js"></script>
+    <script src="../../static/js/smoothscroll.js"></script>
+    <script src="../../static/js/form-validator.min.js"></script>
+    <script src="../../static/js/contact-form-script.js"></script>
+    <script src="../../static/js/isotope.min.js"></script>
+    <script src="../../static/js/images-loded.min.js"></script>
+    <script src="../../static/js/custom.js"></script>
+  <script>
+
+
+{% endblock %}

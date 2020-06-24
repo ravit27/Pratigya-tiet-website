@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Pratigya Abhiyan</title>
+
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="#" />
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../static/css/pogo-slider.min.css" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+    <link rel="stylesheet" href="../../static/css/responsive.css" />
+    <link rel="stylesheet" href="../../static/css/custom.css" />
+
+
+</head>
+
+<body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
+
+    <div id="preloader">
+        <div class="loader">
+            <img src="../../static/loader.gif" alt="#" />
+        </div>
+    </div>
+
+    <header class="top-header">
+        <div class="header_top">
+            
+            <div class="container">
+                <div class="row">
+                    <div class="logo_section">
+                        <a class="navbar-brand" ><img src="../../static/logo.png" alt="image"></a>
+                    </div>
+                    <div class="site_information">
+                        <ul>
+                            <li><a href="mailto:exchang@gmail.com"><img src="../../static/mail_icon.png" alt="#" />mail@gmail.com</a></li>
+                            <li><a href="tel:exchang@gmail.com"><img src="../../static/phone_icon.png" alt="#" />+01234578</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="header_bottom">
+          <div class="container">
+            <div class="col-sm-12">
+                <div class="menu_orange_section" style="background: #ff880e;">
+                   <nav class="navbar header-nav navbar-expand-lg"> 
+                     <div class="menu_section">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
+                    <ul class="navbar-nav">
+                        <li><a class="nav-link" href="index.html">Home</a></li>
+                        <li><a class="nav-link" href="exchange.html">Events</a></li>
+                        <li><a class="nav-link" href="new.html">Discussion</a></li>
+                        <li><a class="nav-link" href="services.html">Our Team</a></li>
+                        <li><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                     </div>
+                 </nav>
+                 
+                </div>
+            </div>
+          </div>
+        </div>
+        
+    </header>
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>answer List</h1>
+  {% if answer_list %}
+  <ul>
+      
+    {% for answer in answer_list %}
+      <div class="row text-info">
+          &nbsp; {{ answer.question.question_text }} 
+      </div>
+          <hr></hr>
+        <div class="row text-dark">
+          {{ answer.answer_text }}</a> 
+        </div>
+        <br>
+        <br>
+        <div class="row text-success">
+            <div class="col"></div>
+            <div class="col-6"></div>
+            <div class="col">
+                by <a href="{{ answer.author.get_absolute_url }}">{{answer.author}} </a> 
+                (on {{answer.date_updated}}) 
+            </div>
+        </div>
+       
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no answers in the library.</p>
+  {% endif %}  
+
+    <div class="footer_bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="crp">© Copyrights 2020 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+
+    <!-- ALL JS FILES -->
+    <script src="../../static/js/jquery.min.js"></script>
+  <script src="../../static/js/popper.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="../../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../../static/js/jquery.pogo-slider.min.js"></script>
+    <script src="../../static/js/slider-index.js"></script>
+    <script src="../../static/js/smoothscroll.js"></script>
+    <script src="../../static/js/form-validator.min.js"></script>
+    <script src="../../static/js/contact-form-script.js"></script>
+    <script src="../../static/js/isotope.min.js"></script>
+    <script src="../../static/js/images-loded.min.js"></script>
+    <script src="../../static/js/custom.js"></script>
+  <script>
+
+     
+{% endblock %}

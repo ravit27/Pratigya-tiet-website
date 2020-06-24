@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Pratigya Abhiyan</title>
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="#" />
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../static/css/pogo-slider.min.css" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+    <link rel="stylesheet" href="../../static/css/responsive.css" />
+    <link rel="stylesheet" href="../../static/css/custom.css" />
+
+
+</head>
+
+<body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
+
+    <div id="preloader">
+        <div class="loader">
+            <img src="../../static/loader.gif" alt="#" />
+        </div>
+    </div>
+
+    <header class="top-header">
+        <div class="header_top">
+            
+            <div class="container">
+                <div class="row">
+                    <div class="logo_section">
+                        <a class="navbar-brand" ><img src="../../static/logo.png" alt="image" height="123" width="350"></a>
+                    </div>
+                    <div class="site_information">
+                        <ul>
+                            <li><p>&emsp;&emsp;&emsp;&ensp;</p> <a href="mailto:exchang@gmail.com"><img src="../../static/mail_icon.png" alt="#" />mail@gmail.com</a></li>
+                            <li><a href="tel:exchang@gmail.com"><img src="../../static/phone_icon.png" alt="#" />+01234578</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="header_bottom">
+          <div class="container">
+            <div class="col-sm-12">
+                <div class="menu_orange_section" style="background: #ff880e;">
+                   <nav class="navbar header-nav navbar-expand-lg"> 
+                     <div class="menu_section">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
+                    <ul class="navbar-nav">
+                        <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                        <li><a class="nav-link" href="{% url 'events' %}">Events</a></li>
+                        <li><a class="nav-link" href="{% url 'index' %}">Discussion</a></li>
+                        <li><a class="nav-link" href="{% url 'team' %}">Our Team</a></li>
+                        <li><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                     </div>
+                 </nav>
+                 
+                </div>
+            </div>
+          </div>
+        </div>
+        
+    </header>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1>Pratigya Discusson Page</h1>
+        <hr></hr>
+        <h2>Page status</h2>
+        <p>Page has the following record counts:</p>
+        <ul>
+          <li><strong>Members:</strong> {{ num_authors }}</li>
+          <li><strong>Questions:</strong> {{ num_questions }}</li>
+          <li><strong>Answers:</strong> {{ num_answers }}</li>
+          <li><strong>Comments:</strong> {{ num_comments }}</li>
+        </ul>
+     </div>
+    </div>
+
+
+
+        <div class="footer_bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="crp">© Copyrights 2020 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+
+    <!-- ALL JS FILES -->
+    <script src="../../static/js/jquery.min.js"></script>
+  <script src="../../static/js/popper.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="../../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../../static/js/jquery.pogo-slider.min.js"></script>
+    <script src="../../static/js/slider-index.js"></script>
+    <script src="../../static/js/smoothscroll.js"></script>
+    <script src="../../static/js/form-validator.min.js"></script>
+    <script src="../../static/js/contact-form-script.js"></script>
+    <script src="../../static/js/isotope.min.js"></script>
+    <script src="../../static/js/images-loded.min.js"></script>
+    <script src="../../static/js/custom.js"></script>
+  <script>
+
+  
+{% endblock %}
